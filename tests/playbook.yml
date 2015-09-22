@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+- hosts: local
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Add the instance to the inventory dynamically
+      add_host:
+        name: "{{ test_ip }}"
+        groups: 'test'
+
+- hosts: test
+  roles:
+    - { role: '../../' }
+...

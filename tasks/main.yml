@@ -1,0 +1,16 @@
+%YAML 1.2
+---
+- name: Install yum-cron
+  yum:
+    name: yum-cron
+    state:  "{{ 'latest' if yum_cron_install_latest else 'present' }}"
+  notify:
+    - restart yum-cron
+
+- name: Ensure the service is set as an upstart
+  service:
+    name: yum-cron
+    enabled: yes
+  notify:
+    - restart yum-cron  
+...
